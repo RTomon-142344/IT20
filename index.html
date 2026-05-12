@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rainier Jev — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #333; overflow-x: hidden; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(255,255,255,0.97);
+      box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 60px; height: 70px;
+    }
+    .nav-logo { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.4rem; color: #1a1a2e; }
+    .nav-logo span { color: #e94560; }
+    .nav-links { display: flex; gap: 35px; list-style: none; }
+    .nav-links a { text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.78rem; letter-spacing: 1.5px; text-transform: uppercase; color: #555; transition: color 0.2s; }
+    .nav-links a:hover { color: #e94560; }
+
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-greeting {
+      display: inline-block; background: #e94560; color: #fff;
+      font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.75rem;
+      letter-spacing: 3px; text-transform: uppercase; padding: 8px 20px; border-radius: 2px;
+      margin-bottom: 30px; animation: fadeInDown 0.7s ease both;
+    }
+    .hero-name {
+      font-family: 'Montserrat', sans-serif; font-weight: 800;
+      font-size: clamp(2.8rem, 6vw, 5.5rem); color: #fff; line-height: 1.1;
+      letter-spacing: -1px; margin-bottom: 20px; animation: fadeInDown 0.7s 0.15s ease both;
+    }
+    .hero-name .accent { color: #e94560; }
+    .hero-typed {
+      font-family: 'Open Sans', sans-serif; font-weight: 300; font-size: 1.2rem;
+      color: rgba(255,255,255,0.65); margin-bottom: 45px; letter-spacing: 0.5px;
+      animation: fadeInDown 0.7s 0.3s ease both;
+    }
+    .hero-typed span { color: #e94560; font-weight: 600; }
+    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; animation: fadeInDown 0.7s 0.45s ease both; }
+    .btn-hero {
+      display: inline-block; padding: 14px 38px; border-radius: 2px;
+      font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.78rem;
+      letter-spacing: 2px; text-transform: uppercase; text-decoration: none; transition: all 0.25s;
+    }
+    .btn-hero.primary { background: #e94560; color: #fff; box-shadow: 0 8px 25px rgba(233,69,96,0.4); }
+    .btn-hero.primary:hover { background: #c73652; transform: translateY(-2px); box-shadow: 0 12px 30px rgba(233,69,96,0.5); }
+    .btn-hero.outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.4); }
+    .btn-hero.outline:hover { border-color: #fff; transform: translateY(-2px); }
+    .hero-scroll-down { position: absolute; bottom: 35px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.4); animation: bounce 2s infinite; }
+    .hero-scroll-down i { font-size: 1.5rem; }
+    @keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+
+    .section-heading { text-align: center; margin-bottom: 60px; }
+    .section-heading h2 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 2.2rem; color: #1a1a2e; letter-spacing: -0.5px; margin-bottom: 14px; }
+    .section-heading .underline { width: 50px; height: 4px; background: #e94560; margin: 0 auto 18px; border-radius: 2px; }
+    .section-heading p { color: #888; font-size: 0.95rem; max-width: 520px; margin: 0 auto; line-height: 1.8; }
+
+    #about { padding: 100px 60px; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .about-avatar { position: relative; }
+    .about-avatar-inner {
+      width: 100%; aspect-ratio: 1; max-width: 380px;
+      background: linear-gradient(135deg, #1a1a2e, #0f3460); border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 9rem;
+      color: rgba(233,69,96,0.18); letter-spacing: -8px;
+    }
+    .about-avatar::before {
+      content: ''; position: absolute; top: 20px; left: 20px; right: -20px; bottom: -20px;
+      border: 3px solid #e94560; border-radius: 4px; z-index: -1;
+    }
+    .about-text h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.9rem; color: #1a1a2e; margin-bottom: 6px; }
+    .about-text .role { color: #e94560; font-weight: 600; font-size: 0.88rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px; display: block; }
+    .about-text p { color: #666; font-size: 0.92rem; line-height: 1.9; margin-bottom: 16px; }
+    .info-list { list-style: none; margin: 24px 0; }
+    .info-list li { display: flex; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid #f0f0f0; font-size: 0.85rem; color: #555; }
+    .info-list li:last-child { border-bottom: none; }
+    .info-list li strong { color: #1a1a2e; font-weight: 600; min-width: 80px; }
+    .info-list li i { color: #e94560; width: 16px; }
+
+    #skills { background: #f8f9fc; padding: 100px 60px; }
+    .skills-inner { max-width: 900px; margin: 0 auto; }
+    .skill-bars { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 60px; }
+    .skill-bar-label { display: flex; justify-content: space-between; margin-bottom: 8px; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.8rem; color: #1a1a2e; letter-spacing: 0.5px; }
+    .skill-bar-label span { color: #e94560; }
+    .skill-bar-track { height: 6px; background: #e8eaf0; border-radius: 3px; overflow: hidden; }
+    .skill-bar-fill { height: 100%; background: linear-gradient(90deg, #e94560, #ff7eb3); border-radius: 3px; width: 0; transition: width 1.2s cubic-bezier(0.4,0,0.2,1); }
+
+    #projects { padding: 100px 60px; max-width: 1100px; margin: 0 auto; }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+    .project-card { border-radius: 4px; overflow: hidden; box-shadow: 0 5px 25px rgba(0,0,0,0.08); transition: transform 0.3s, box-shadow 0.3s; background: #fff; border: 1px solid #eee; }
+    .project-card:hover { transform: translateY(-6px); box-shadow: 0 15px 45px rgba(0,0,0,0.14); }
+    .card-thumb {
+      height: 180px; background: linear-gradient(135deg, #1a1a2e, #0f3460);
+      display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;
+    }
+    .card-thumb::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E"); }
+    .card-thumb i { font-size: 3rem; color: rgba(233,69,96,0.7); position: relative; z-index: 1; }
+    .card-badge { position: absolute; top: 14px; right: 14px; background: #e94560; color: #fff; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.65rem; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 12px; border-radius: 2px; }
+    .card-body { padding: 28px; }
+    .card-body h3 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.1rem; color: #1a1a2e; margin-bottom: 10px; }
+    .card-body p { color: #888; font-size: 0.85rem; line-height: 1.75; margin-bottom: 20px; }
+    .card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .card-tag { background: #f0f1f7; color: #555; font-size: 0.7rem; font-family: 'Montserrat', sans-serif; font-weight: 600; padding: 4px 10px; border-radius: 2px; letter-spacing: 0.5px; }
+    .card-tag.featured { background: rgba(233,69,96,0.1); color: #e94560; }
+
+    #contact { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); padding: 100px 60px; text-align: center; }
+    #contact .section-heading h2 { color: #fff; }
+    #contact .section-heading p { color: rgba(255,255,255,0.55); }
+    .contact-cards { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; max-width: 700px; margin: 0 auto 50px; }
+    .contact-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 30px 36px; min-width: 180px; transition: all 0.3s; }
+    .contact-card:hover { background: rgba(233,69,96,0.15); border-color: #e94560; transform: translateY(-4px); }
+    .contact-card i { font-size: 1.8rem; color: #e94560; margin-bottom: 12px; display: block; }
+    .contact-card p { color: rgba(255,255,255,0.5); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1.5px; font-family: 'Montserrat', sans-serif; font-weight: 600; margin-bottom: 6px; }
+    .contact-card a, .contact-card span { color: #fff; font-size: 0.85rem; text-decoration: none; }
+
+    footer { background: #111; padding: 28px 60px; text-align: center; color: #555; font-size: 0.8rem; letter-spacing: 0.5px; }
+    footer span { color: #e94560; }
+
+    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 820px) {
+      nav { padding: 0 24px; } .nav-links { display: none; }
+      #about { grid-template-columns: 1fr; padding: 60px 24px; gap: 40px; }
+      .about-avatar { display: none; }
+      #skills { padding: 60px 24px; } .skill-bars { grid-template-columns: 1fr; }
+      #projects { padding: 60px 24px; } #contact { padding: 60px 24px; }
+      footer { padding: 20px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">Rainier<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-content">
+      <div class="hero-greeting">Welcome to my portfolio</div>
+      <h1 class="hero-name">Rainier Jev <span class="accent">Tomon</span></h1>
+      <p class="hero-typed">I'm a <span>Web Developer</span> &amp; BSIT Student</p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn-hero primary">View My Work</a>
+        <a href="#contact" class="btn-hero outline">Get In Touch</a>
+      </div>
+    </div>
+    <div class="hero-scroll-down"><i class="fas fa-chevron-down"></i></div>
+  </section>
+
+  <section style="padding: 100px 60px; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;" id="about">
+    <div class="about-avatar reveal">
+      <div class="about-avatar-inner">RJ</div>
+    </div>
+    <div class="reveal" style="transition-delay:0.15s">
+      <h3 style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.9rem;color:#1a1a2e;margin-bottom:6px;">Rainier Jev Luis V. Tomon</h3>
+      <span style="color:#e94560;font-weight:600;font-size:0.88rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:20px;display:block;">3rd Year BSIT Student</span>
+      <p style="color:#666;font-size:0.92rem;line-height:1.9;margin-bottom:16px;">Hello! I'm a passionate Information Technology student who loves building web applications. I enjoy solving real-world problems through clean, functional code.</p>
+      <p style="color:#666;font-size:0.92rem;line-height:1.9;margin-bottom:16px;">I specialize in full-stack web development using PHP and the Laravel framework, and I thrive working end-to-end — from database design to frontend UI.</p>
+      <ul class="info-list">
+        <li><i class="fas fa-graduation-cap"></i><strong>Degree:</strong> BSIT — 3rd Year</li>
+        <li><i class="fas fa-code"></i><strong>Stack:</strong> PHP, Laravel, MySQL</li>
+        <li><i class="fas fa-map-marker-alt"></i><strong>Location:</strong> Tagum City</li>
+        <li><i class="fas fa-briefcase"></i><strong>Status:</strong> Open to opportunities</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="skills-inner">
+      <div class="section-heading reveal">
+        <h2>My Skills</h2>
+        <div class="underline"></div>
+        <p>Technologies and tools I've worked with throughout my studies and personal projects.</p>
+      </div>
+      <div class="skill-bars reveal" style="grid-template-columns: 1fr; max-width: 500px; margin: 0 auto;">
+        <div class="skill-bar-item">
+          <div class="skill-bar-label">Laravel <span>75%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div>
+        </div>
+        <div class="skill-bar-item">
+          <div class="skill-bar-label">MySQL <span>78%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="78"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" style="padding: 100px 60px; max-width: 1100px; margin: 0 auto;">
+    <div class="section-heading reveal">
+      <h2>My Projects</h2>
+      <div class="underline"></div>
+      <p>A collection of work I've built — all done solo, all from scratch.</p>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <div class="card-thumb">
+          <span class="card-badge">Completed</span>
+          <i class="fas fa-university"></i>
+        </div>
+        <div class="card-body">
+          <h3>Academic Portal</h3>
+          <p>A full-stack academic management system built solo using Laravel. Handles course management, student records, grades, and faculty workflows in one unified platform.</p>
+          <div class="card-tags">
+            <span class="card-tag featured">Laravel</span>
+            <span class="card-tag">PHP</span>
+            <span class="card-tag">MySQL</span>
+            <span class="card-tag">MVC</span>
+            <span class="card-tag">Solo</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card reveal" style="transition-delay:0.12s;opacity:0.65;">
+        <div class="card-thumb">
+          <i class="fas fa-plus-circle"></i>
+        </div>
+        <div class="card-body">
+          <h3>Coming Soon</h3>
+          <p>More projects are in development. Stay tuned for what's next — always building, always learning.</p>
+          <div class="card-tags">
+            <span class="card-tag">In Progress</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-heading reveal">
+      <h2>Get In Touch</h2>
+      <div class="underline"></div>
+      <p>Open to collaborations, internships, and exciting opportunities. Don't hesitate to reach out!</p>
+    </div>
+    <div class="contact-cards reveal">
+      <div class="contact-card">
+        <i class="fas fa-envelope"></i>
+        <p>Email</p>
+        <a href="mailto:r.tomon.142344.tc@umindanao.edu.ph">r.tomon.142344.tc@umindanao.edu.ph</a>
+      </div>
+      <div class="contact-card">
+        <i class="fab fa-github"></i>
+        <p>GitHub</p>
+        <a href="https://github.com/RTomon-142344" target="_blank">https://github.com/RTomon-142344</a>
+      </div>
+      <div class="contact-card">
+        <i class="fas fa-map-marker-alt"></i>
+        <p>Location</p>
+        <span>Tagum City</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 Rainier
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          e.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+            bar.style.width = bar.dataset.width + '%';
+          });
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
